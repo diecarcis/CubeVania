@@ -7,27 +7,27 @@ backgrnd_mod=[]
 backgrnd_mod.append([
 	'',
 	'                                                                                 ',
-	' #                                                                               ',
-	' #                                                                               ',
-	' #                                                                               ',
-	' #                                                            .##                ',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
-	' #                            ########################         H#                ',
-	' #                                                             H#           #####',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
-	' #                                                             H                 ',
-	' #                                                             H                 ',
-	' #                                                             H######           ',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
-	' #                                                             H#           HHHHH',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
-	' #                                                             H#                ',
+	'                                                                                 ',
+	'                                                                                 ',
+	'                                                                                 ',
+	'                                                              .##                ',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                              ########################         H#                ',
+	'                                                               H#           #####',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H                 ',
+	'                                                               H                 ',
+	'                                                               H######           ',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H#           HHHHH',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H#                ',
 	' #####################################################################      #####',])
 
 act_backgrnd=0
@@ -73,11 +73,11 @@ class player():
 	y=1
 
 	def control():
-		# if player.dir('left')=='stair' or player.dir('right')=='stair':
-		# 	if keyboard.is_pressed('w') and not player.dir('up'):
-		# 		player.x-=1
-		# 	if keyboard.is_pressed('s') and not player.dir('down'):
-		# 		player.x+=1
+		if player.dir('left')=='stair' or player.dir('right')=='stair':
+			if keyboard.is_pressed('w') and not player.dir('up'):
+				player.x-=1
+			if keyboard.is_pressed('s') and not player.dir('down'):
+				player.x+=1
 
 		if keyboard.is_pressed('a') and not player.dir('left'):
 			player.y-=1
@@ -90,8 +90,8 @@ class player():
 		if keyboard.is_pressed('space'):
 			if player.dir('down') and not player.dir('up'):
 				player.jump_time=7
-				return
-		if player.jump_time==0 and not player.dir('down'):#  and player.dir('left')!='stair' and player.dir('right')!='stair':
+
+		if player.jump_time==0 and not player.dir('down') and player.dir('left')!='stair' and player.dir('right')!='stair':
 			player.x+=1
 
 		if player.jump_time>0:
@@ -206,5 +206,3 @@ if __name__=='__main__':
 
 
 '''
-
-
