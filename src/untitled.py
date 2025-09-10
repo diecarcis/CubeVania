@@ -86,13 +86,13 @@ class player():
 
 		if player.dir('up')=='block' or player.dir('down')=='stair':
 			player.jump_time=0
-		if player.jump_time==0 and not player.dir('down'):#  and player.dir('left')!='stair' and player.dir('right')!='stair':
-			player.x+=1
 
 		if keyboard.is_pressed('space'):
 			if player.dir('down') and not player.dir('up'):
 				player.jump_time=7
 				return
+		if player.jump_time==0 and not player.dir('down'):#  and player.dir('left')!='stair' and player.dir('right')!='stair':
+			player.x+=1
 
 		if player.jump_time>0:
 			player.x-=1
@@ -203,5 +203,6 @@ if __name__=='__main__':
  
 ▄▄▄
 ███
+
 
 '''
