@@ -6,32 +6,33 @@ import os
 backgrnd_mod=[]
 backgrnd_mod.append([
 	'',
-	'                                                                                            ',
-	'                                                                                            ',
-	'                                                                                            ',
-	'                                                                                            ',
-	'                                                              .##                           ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	'                              ########################         H#                           ',
-	'                                                               H#           #####           ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	'                                                               H                            ',
-	'                                                               H                            ',
-	'                                                               H######                      ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	'                                                               H#           HHHHH           ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	'                                                               H#                           ',
-	' #####################################################################      #####           ',])
+	'                                                                                 ',
+	'                                                                                 ',
+	'                                                                                 ',
+	'                                                                                 ',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                              ########################         H#                ',
+	'                                                               H#           #####',
+	'                                                               H#                ',
+	'                                                               H#                ',
+	'                                                               H                 ',
+	'                                                               H                 ',
+	'                                            H#########H        H######           ',
+	'                                            H         H        H#                ',
+	'                                            H         H        H#                ',
+	'                                            H         H        H#                ',
+	'                                            H         H        H#           HHHHH',
+	'                                            H         H        H#                ',
+	'                                            H         H        H#                ',
+	'                                            H                  H#                ',
+	'                                            H                  H#                ',
+	' #####################################################################      #####',])
 
 act_backgrnd=0
-enemy_bullets=[]
+mcol=0;
+mlin=0;
 
 class ui:
 	def prat(obj,x=0,y=0):
@@ -46,6 +47,7 @@ class ui:
 	def print_backgrnd(x,y):
 		backgrnd_temp=backgrnd_mod[act_backgrnd]
 		ui.gt(1,1)
+
 		for i in range(1,len(backgrnd_temp)):
 			for j in range(1,len(backgrnd_temp[i])):
 				if backgrnd_temp[i][j]=='.':
@@ -78,6 +80,13 @@ class player():
 				player.x-=1
 			if keyboard.is_pressed('s') and not player.dir('down'):
 				player.x+=1
+			if keyboard.is_pressed('space'):
+				if player.dir('left')=='stair' and not player.dir('right'):
+					player.y+=1;
+					player.jump_time=7;
+				if player.dir('right')=='stair' and not player.dir('left'):
+					player.y-=1;
+					player.jump_time=7;
 
 		if keyboard.is_pressed('a') and not player.dir('left'):
 			player.y-=1
@@ -136,10 +145,6 @@ class player():
 		backgrnd_temp=backgrnd_mod[act_backgrnd]
 		for i in range(2):
 			for j in range(4):
-				for k in enemy_bullets:
-	  				if k['x']==i and k['y']==j:
-	  					player_lives-=1;
-	  					enemy_bullets.remove(k)
 				if backgrnd_temp[player.x+i][player.y+j]=='.':
 					game.over=True
 
@@ -148,6 +153,8 @@ class game:
 
 	def loop():
 		while 1:
+			maxy,maxx=os.get_terminal_size();
+
 			player.control()
 			ui.print_backgrnd(0,0)
 			player.check_hitbox()
@@ -156,7 +163,7 @@ class game:
 				return
 			time.sleep(0.03)
 	
-	def end_game():
+	def end_game(): 
 		if over:
 			xd
 
@@ -206,4 +213,3 @@ if __name__=='__main__':
 
 
 '''
-
