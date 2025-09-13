@@ -34,6 +34,10 @@ act_backgrnd=0
 mcol=0;
 mlin=0;
 
+class level:
+    maxx=22
+    maxy=77
+
 class ui:
 	def prat(obj,x=0,y=0):
 		for i in range(len(obj)):
@@ -104,6 +108,8 @@ class player():
 			player.x+=1
 
 		if player.jump_time>0:
+			if player.x == 0:
+				game.end_game()
 			player.x-=1
 			player.jump_time-=1
 			if not keyboard.is_pressed('space'):
@@ -112,6 +118,7 @@ class player():
 
 	def dir(wall_dir):
 		if wall_dir=='up':
+			if player.x == 1: return 'block'
 			if backgrnd_mod[act_backgrnd][player.x-1][player.y]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x-1][player.y+1]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x-1][player.y+2]=='#':return 'block'
@@ -121,6 +128,10 @@ class player():
 			if backgrnd_mod[act_backgrnd][player.x-1][player.y+2]=='H':return 'stair'
 			if backgrnd_mod[act_backgrnd][player.x-1][player.y+3]=='H':return 'stair'
 		if wall_dir=='down':
+			if player.x == level.maxx:
+				game.over=True
+				game.end_game()
+				return 'block'
 			if backgrnd_mod[act_backgrnd][player.x+2][player.y]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x+2][player.y+1]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x+2][player.y+2]=='#':return 'block'
@@ -130,11 +141,13 @@ class player():
 			if backgrnd_mod[act_backgrnd][player.x+2][player.y+2]=='H':return 'stair'
 			if backgrnd_mod[act_backgrnd][player.x+2][player.y+3]=='H':return 'stair'
 		if wall_dir=='left':
+			if player.y == 1: return 'block'
 			if backgrnd_mod[act_backgrnd][player.x][player.y-1]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x+1][player.y-1]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x][player.y-1]=='H':return 'stair'
 			if backgrnd_mod[act_backgrnd][player.x+1][player.y-1]=='H':return 'stair'
 		if wall_dir=='right':
+			if player.y == level.maxy: return 'block'
 			if backgrnd_mod[act_backgrnd][player.x][player.y+4]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x+1][player.y+4]=='#':return 'block'
 			if backgrnd_mod[act_backgrnd][player.x][player.y+4]=='H':return 'stair'
@@ -164,8 +177,7 @@ class game:
 			time.sleep(0.03)
 	
 	def end_game(): 
-		if over:
-			xd
+		quit
 
 def main():
 	os.system('cls')
@@ -173,7 +185,7 @@ def main():
 	if game.over==True:
 		print('game over')
 		time.sleep(1)
-		os.system('C:\\Users\\dieca\\Documents\\Programming\\Python\\untitled.py')
+		os.system('python D://Alumnos//Leandro//x.py')
 
 if __name__=='__main__':
 	main()
